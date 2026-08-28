@@ -1,0 +1,153 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+}
+
+enum InquiryStatus {
+  NEW
+  CONTACTED
+  IN_PROGRESS
+  COMPLETED
+  CLOSED
+}
+
+enum ServiceCategory {
+  UMRAH
+  VISIT_VISA
+  STUDY_VISA
+  BUSINESS_SERVICES
+  SPECIALIZED
+}
+
+model AdminUser {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Country {
+  id           String        @id @default(uuid())
+  name         String
+  slug         String        @unique
+  code         String        @unique
+  flagUrl      String
+  heroImageUrl String
+  overview     String        @db.Text
+  isActive     Boolean       @default(true)
+  order        Int           @default(0)
+  visaServices VisaService[]
+  faqs         CountryFaq[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model VisaService {
+  id           String          @id @default(uuid())
+  title        String
+  category     ServiceCategory
+  description  String          @db.Text
+  requirements Json
+  processSteps Json
+  countryId    String
+  country      Country         @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+model Package {
+  id          String         @id @default(uuid())
+  title       String
+  slug        String         @unique
+  category    String
+  destination String
+  description String         @db.Text
+  price       Decimal        @db.Decimal(10, 2)
+  discount    Decimal?       @db.Decimal(10, 2)
+  duration    String
+  hotel       String
+  transport   String
+  flightInfo  String?
+  included    Json
+  excluded    Json
+  isFeatured  Boolean        @default(false)
+  isActive    Boolean        @default(true)
+  images      PackageImage[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model PackageImage {
+  id        String   @id @default(uuid())
+  url       String
+  isPrimary Boolean  @default(false)
+  packageId String
+  package   Package  @relation(fields: [packageId], references: [id], onDelete: Cascade)
+}
+
+model Inquiry {
+  id          String        @id @default(uuid())
+  fullName    String
+  email       String
+  phone       String
+  country     String
+  service     String
+  travelType  String
+  travelDate  DateTime?
+  message     String        @db.Text
+  status      InquiryStatus @default(NEW)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Testimonial {
+  id           String   @id @default(uuid())
+  clientName   String
+  country      String
+  serviceUsed  String
+  comment      String   @db.Text
+  avatarUrl    String?
+  videoUrl     String?
+  thumbnailUrl String?
+  isApproved   Boolean  @default(false)
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Media {
+  id        String   @id @default(uuid())
+  filename  String
+  url       String
+  mimeType  String
+  size      Int
+  altText   String?
+  createdAt DateTime @default(now())
+}
+
+model CountryFaq {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String   @db.Text
+  countryId String
+  country   Country  @relation(fields: [countryId], references: [id], onDelete: Cascade)
+}
+
+model WebsiteSetting {
+  key       String   @id
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}

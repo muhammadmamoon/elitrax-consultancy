@@ -28,7 +28,7 @@ export default async function AdminTestimonialsPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-navy-800">
-            {testimonials.map((t) => (
+            {testimonials.map((t:any) => (
               <tr key={t.id} className="hover:bg-navy-800/50 transition">
                 <td className="px-6 py-4 font-semibold text-white">
                   {t.clientName}

@@ -1,7 +1,7 @@
-// src/app/(admin)/admin/dashboard/page.tsx
-import { db } from "../../../lib/db";
-import { Package, Globe, MessageSquare, Video, ShieldCheck, CheckCircle } from "lucide-react";
+// cspell:words ELITRAX
 import Link from "next/link";
+import { Package, Globe, MessageSquare, ShieldCheck } from "lucide-react";
+import { db } from "../../../lib/db";
 
 export default async function AdminDashboardPage() {
   const [packageCount, countryCount, inquiryCount, pendingInquiries] = await Promise.all([
@@ -26,11 +26,11 @@ export default async function AdminDashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((s, i) => {
+        {stats.map((s) => {
           const Icon = s.icon;
           return (
             <Link
-              key={i}
+              key={s.title}
               href={s.href}
               className={`p-6 rounded-2xl border transition-all ${
                 s.highlight

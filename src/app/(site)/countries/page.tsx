@@ -1,9 +1,11 @@
+// cspell:words ELITRAX
 import CountryCard from "../../components/ui/CountryCard";
 import { Globe2 } from "lucide-react";
 
 export const metadata = {
   title: "Global Destinations | ELITRAX Consultancy",
-  description: "Browse our supported countries for visit visas, study permits, and corporate migration.",
+  description:
+    "Browse our supported countries for visit visas, study permits, and corporate migration.",
 };
 
 export default function CountriesPage() {
@@ -14,7 +16,8 @@ export default function CountriesPage() {
       name: "United States",
       slug: "usa",
       flagUrl: "🇺🇸",
-      heroImageUrl: "https://images.unsplash.com/photo-1508433957232-3107f5fd5995?auto=format&fit=crop&w=1200&q=80",
+      heroImageUrl:
+        "https://images.unsplash.com/photo-1508433957232-3107f5fd5995?auto=format&fit=crop&w=1200&q=80",
       servicesCount: 3,
     },
     {
@@ -22,7 +25,8 @@ export default function CountriesPage() {
       name: "United Kingdom",
       slug: "uk",
       flagUrl: "🇬🇧",
-      heroImageUrl: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80",
+      heroImageUrl:
+        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80",
       servicesCount: 2,
     },
     {
@@ -30,7 +34,8 @@ export default function CountriesPage() {
       name: "Canada",
       slug: "canada",
       flagUrl: "🇨🇦",
-      heroImageUrl: "https://images.unsplash.com/photo-1517935703635-271905454087?auto=format&fit=crop&w=1200&q=80",
+      heroImageUrl:
+        "https://images.unsplash.com/photo-1517935703635-271905454087?auto=format&fit=crop&w=1200&q=80",
       servicesCount: 4,
     },
     {
@@ -38,7 +43,8 @@ export default function CountriesPage() {
       name: "Schengen Area",
       slug: "schengen",
       flagUrl: "🇪🇺",
-      heroImageUrl: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=80",
+      heroImageUrl:
+        "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=80",
       servicesCount: 2,
     },
     {
@@ -46,7 +52,8 @@ export default function CountriesPage() {
       name: "Australia",
       slug: "australia",
       flagUrl: "🇦🇺",
-      heroImageUrl: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&w=1200&q=80",
+      heroImageUrl:
+        "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&w=1200&q=80",
       servicesCount: 2,
     },
     {
@@ -54,9 +61,10 @@ export default function CountriesPage() {
       name: "Turkey",
       slug: "turkey",
       flagUrl: "🇹🇷",
-      heroImageUrl: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=80",
+      heroImageUrl:
+        "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=80",
       servicesCount: 3,
-    }
+    },
   ];
 
   return (

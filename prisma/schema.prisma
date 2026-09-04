@@ -27,6 +27,8 @@ enum ServiceCategory {
   STUDY_VISA
   BUSINESS_SERVICES
   SPECIALIZED
+  TOURIST
+  BUSINESS
 }
 
 model AdminUser {
@@ -65,6 +67,12 @@ model Country {
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 }
+model Setting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}
 
 model VisaService {
   id           String          @id @default(uuid())
@@ -78,10 +86,7 @@ model VisaService {
   createdAt    DateTime        @default(now())
   updatedAt    DateTime        @updatedAt
 }
-enum ServiceCategory {
-  Tourist   // <-- Exact casing check karein (Tourist hai, TOURIST hai, ya tourist hai?)
-  Business
-}
+
 model Package {
   id          String         @id @default(uuid())
   title       String
@@ -133,6 +138,7 @@ model Testimonial {
   country      String
   serviceUsed  String
   comment      String   @db.Text
+  rating       Int      @default(5)   // <-- Yeh new line add karein
   avatarUrl    String?
   videoUrl     String?
   thumbnailUrl String?

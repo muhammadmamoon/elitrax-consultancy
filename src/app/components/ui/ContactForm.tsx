@@ -44,8 +44,8 @@ export default function ContactForm() {
         travelDate: "",
         message: "",
       });
-    } catch (err: any) {
-      setError(err.message || "Failed to submit request.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to submit request.");
     } finally {
       setLoading(false);
     }

@@ -17,7 +17,7 @@ interface Destination {
 const destinations: Destination[] = [
   { name: "United States", slug: "usa", img: "https://images.unsplash.com/photo-1508433957232-3107f5fd5995?auto=format&fit=crop&w=1200&q=80", desc: "B1/B2, F1 Academic Track & Appointment Support" },
   { name: "United Kingdom", slug: "uk", img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80", desc: "Standard Visitor, CAS Study Routes & Concierge Filing" },
-  { name: "Canada", slug: "canada", img: "https://images.unsplash.com/photo-1517935703635-271905454087?auto=format&fit=crop&w=1200&q=80", desc: "Visitor Visa, Study Direct Stream & ATIP/ODN File Review" },
+  { name: "Canada", slug: "canada", img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80", desc: "Visitor Visa, Study Direct Stream & ATIP/ODN File Review" },
   { name: "Schengen Area", slug: "schengen", img: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=80", desc: "Multi-Entry Business & Tourism Access to 27 States" },
   { name: "Australia", slug: "australia", img: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&w=1200&q=80", desc: "Subclass 600, Subclass 500 Higher Ed Placement" },
 ];

@@ -1,35 +1,7 @@
-// src/app/api/inquiries/route.ts
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { db } from "../../lib/db";
 
-export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const { fullName, email, phone, country, service, travelType, travelDate, message } = body;
-
-    if (!fullName || !email || !phone) {
-      return NextResponse.json({ error: "Required fields missing" }, { status: 400 });
-    }
-
-    const inquiry = await db.inquiry.create({
-      data: {
-        fullName,
-        email,
-        phone,
-        country: country || "Unspecified",
-        service: service || "General Visa Assistance",
-        travelType: travelType || "Individual",
-        travelDate: travelDate ? new Date(travelDate) : null,
-        message: message || "",
-      },
-    });
-
-    return NextResponse.json({ success: true, data: inquiry }, { status: 201 });
-  } catch (error) {
-    return NextResponse.json({ error: "Failed to persist inquiry" }, { status: 500 });
-  }
-}
-
+// 1. Fetch Inquiries
 export async function GET() {
   try {
     const inquiries = await db.inquiry.findMany({
@@ -37,6 +9,52 @@ export async function GET() {
     });
     return NextResponse.json(inquiries);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to retrieve records" }, { status: 500 });
+    console.error("Error fetching inquiries:", error);
+    return NextResponse.json({ error: "Failed to fetch inquiries" }, { status: 500 });
+  }
+}
+
+// 2. Update Status (PUT)
+export async function PUT(req: Request) {
+  try {
+    const body = await req.json();
+    const { id, status } = body;
+
+    if (!id || !status) {
+      return NextResponse.json({ error: "ID and status are required" }, { status: 400 });
+    }
+
+    const updated = await db.inquiry.update({
+      where: { id },
+      data: {
+        status: status, // Enum value update hogi
+      },
+    });
+
+    return NextResponse.json({ success: true, inquiry: updated });
+  } catch (error) {
+    console.error("Error updating inquiry status:", error);
+    return NextResponse.json({ error: "Failed to update status" }, { status: 500 });
+  }
+}
+
+// 3. Delete Inquiry (DELETE)
+export async function DELETE(req: Request) {
+  try {
+    const url = new URL(req.url);
+    const id = url.searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({ error: "Inquiry ID is required" }, { status: 400 });
+    }
+
+    await db.inquiry.delete({
+      where: { id },
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Error deleting inquiry:", error);
+    return NextResponse.json({ error: "Failed to delete inquiry" }, { status: 500 });
   }
 }

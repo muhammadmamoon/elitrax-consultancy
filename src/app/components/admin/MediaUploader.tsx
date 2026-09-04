@@ -1,8 +1,7 @@
-// src/components/admin/MediaUploader.tsx
 "use client";
 
 import { useState } from "react";
-import { UploadCloud, X, Loader2, Image as ImageIcon } from "lucide-react";
+import { UploadCloud, X, Loader2 } from "lucide-react";
 import Image from "next/image";
 
 interface MediaUploaderProps {
@@ -10,7 +9,10 @@ interface MediaUploaderProps {
   currentImage?: string | null;
 }
 
-export default function MediaUploader({ onUploadSuccess, currentImage }: MediaUploaderProps) {
+export default function MediaUploader({
+  onUploadSuccess,
+  currentImage,
+}: MediaUploaderProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [preview, setPreview] = useState(currentImage || "");
@@ -44,7 +46,7 @@ export default function MediaUploader({ onUploadSuccess, currentImage }: MediaUp
       } else {
         setError(data.error || "Upload failed");
       }
-    } catch (err) {
+    } catch {
       setError("Network error during upload");
     } finally {
       setLoading(false);
@@ -55,12 +57,22 @@ export default function MediaUploader({ onUploadSuccess, currentImage }: MediaUp
     <div className="space-y-3">
       {preview ? (
         <div className="relative w-full h-48 rounded-xl overflow-hidden border border-navy-700 group bg-navy-950">
-          <Image src={preview} alt="Preview" fill className="object-cover" />
+          <Image
+            src={preview}
+            alt="Preview"
+            fill
+            sizes="(max-width: 768px) 100vw, 500px"
+            className="object-cover"
+          />
           <div className="absolute inset-0 bg-navy-950/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
             <button
               type="button"
-              onClick={() => { setPreview(""); onUploadSuccess(""); }}
-              className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition"
+              aria-label="Remove image"
+              onClick={() => {
+                setPreview("");
+                onUploadSuccess("");
+              }}
+              className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -77,9 +89,17 @@ export default function MediaUploader({ onUploadSuccess, currentImage }: MediaUp
             <p className="text-sm text-gray-400">
               <span className="font-semibold text-gold-400">Click to upload</span> or drag and drop
             </p>
-            <p className="text-xs text-gray-500 mt-1">SVG, PNG, JPG or WEBP (Max 15MB)</p>
+            <p className="text-xs text-gray-500 mt-1">
+              SVG, PNG, JPG or WEBP (Max 15MB)
+            </p>
           </div>
-          <input type="file" className="hidden" accept="image/*" onChange={handleFileChange} disabled={loading} />
+          <input
+            type="file"
+            className="hidden"
+            accept="image/*"
+            onChange={handleFileChange}
+            disabled={loading}
+          />
         </label>
       )}
       {error && <p className="text-xs text-red-400">{error}</p>}

@@ -1,10 +1,11 @@
-// src/app/(site)/about/page.tsx
+// cspell:words ELITRAX
 import Image from "next/image";
-import { Target, Shield, Award, Users } from "lucide-react";
+import { Target, Shield } from "lucide-react";
 
 export const metadata = {
   title: "About Us | ELITRAX Consultancy",
-  description: "Learn about ELITRAX Consultancy, our mission, vision, and core values in premium travel and visa consulting.",
+  description:
+    "Learn about ELITRAX Consultancy, our mission, vision, and core values in premium travel and visa consulting.",
 };
 
 export default function AboutPage() {
@@ -40,6 +41,7 @@ export default function AboutPage() {
               src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" 
               alt="Corporate Consultation"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-navy-950/20" />

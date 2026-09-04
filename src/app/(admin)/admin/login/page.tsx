@@ -1,4 +1,4 @@
-// src/app/(admin)/admin/login/page.tsx
+// cspell:words ELITRAX elitrax
 "use client";
 
 import { useState } from "react";
@@ -31,7 +31,7 @@ export default function AdminLoginPage() {
         const data = await res.json();
         setError(data.error || "Login failed");
       }
-    } catch (err) {
+    } catch {
       setError("An error occurred during authentication.");
     } finally {
       setLoading(false);
@@ -60,32 +60,43 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleLogin} className="space-y-5">
           <div>
-            <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Email Address</label>
+            <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">
+              Email Address
+            </label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
               <input 
-                type="email" required
-                value={email} onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 rounded-lg bg-navy-950 border border-navy-800 text-white focus:border-gold-500 focus:outline-none transition"
                 placeholder="admin@elitrax.com"
               />
             </div>
           </div>
+
           <div>
-            <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Password</label>
+            <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">
+              Password
+            </label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
               <input 
-                type="password" required
-                value={password} onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 rounded-lg bg-navy-950 border border-navy-800 text-white focus:border-gold-500 focus:outline-none transition"
                 placeholder="••••••••"
               />
             </div>
           </div>
+
           <button 
-            type="submit" disabled={loading}
-            className="w-full py-3.5 mt-4 bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold uppercase tracking-wider text-sm rounded-lg transition-colors"
+            type="submit"
+            disabled={loading}
+            className="w-full py-3.5 mt-4 bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold uppercase tracking-wider text-sm rounded-lg transition-colors disabled:opacity-50"
           >
             {loading ? "Authenticating..." : "Secure Login"}
           </button>

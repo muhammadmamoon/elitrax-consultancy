@@ -1,4 +1,5 @@
-// cspell:words ELITRAX
+
+export const dynamic = "force-dynamic";
 import Link from "next/link";
 import { 
   LayoutDashboard, 

@@ -1,4 +1,6 @@
 // cspell:words ELITRAX
+
+export const dynamic = "force-dynamic";
 import Link from "next/link";
 import { Package, Globe, MessageSquare, ShieldCheck } from "lucide-react";
 import { db } from "../../../lib/db";
